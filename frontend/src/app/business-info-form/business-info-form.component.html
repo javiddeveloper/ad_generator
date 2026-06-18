@@ -1,0 +1,54 @@
+<div class="form-container">
+  <h2 class="form-title">Business Information</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="form-group">
+      <label for="businessName">Business Name <span class="required">*</span></label>
+      <input
+        id="businessName"
+        type="text"
+        formControlName="businessName"
+        placeholder="Enter your business name"
+        [class.field-invalid]="isFieldInvalid('businessName')"
+      />
+      <div class="error-messages" *ngIf="isFieldInvalid('businessName')">
+        <span *ngIf="form.get('businessName')?.errors?.['required']">Business name is required.</span>
+        <span *ngIf="form.get('businessName')?.errors?.['minlength']">Minimum 2 characters required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address <span class="required">*</span></label>
+      <input
+        id="address"
+        type="text"
+        formControlName="address"
+        placeholder="Enter your business address"
+        [class.field-invalid]="isFieldInvalid('address')"
+      />
+      <div class="error-messages" *ngIf="isFieldInvalid('address')">
+        <span *ngIf="form.get('address')?.errors?.['required']">Address is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number <span class="required">*</span></label>
+      <input
+        id="phone"
+        type="tel"
+        formControlName="phone"
+        placeholder="e.g. +1 234 567 8901"
+        [class.field-invalid]="isFieldInvalid('phone')"
+      />
+      <div class="error-messages" *ngIf="isFieldInvalid('phone')">
+        <span *ngIf="form.get('phone')?.errors?.['required']">Phone number is required.</span>
+        <span *ngIf="form.get('phone')?.errors?.['pattern']">Enter a valid phone number (7-20 digits).</span>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="form.invalid && submitted">
+      Save Business Info
+    </button>
+
+  </form>
+</div>
